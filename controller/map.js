@@ -52,7 +52,7 @@ router.post('/indian-languages', async (req, res) => {
     
     
         try {
-            const query = `SELECT Name FROM aksharamuseum.languageinfos WHERE Name LIKE :firstLetterPattern`;
+            const query = `SELECT Name FROM aksharaMuseum.languageinfos WHERE Name LIKE :firstLetterPattern`;
             const results = await sequelize.query(query, {
                 replacements: { firstLetterPattern: `${firstLetter}%` },
                 type: sequelize.QueryTypes.SELECT
@@ -87,7 +87,7 @@ router.get('/language-details/:language', async (req, res) => {
 
     try {
         // Fetch details from languageinfos table
-        const languageQuery = `SELECT * FROM aksharamuseum.languageinfos WHERE Name = ?`;
+        const languageQuery = `SELECT * FROM aksharaMuseum.languageinfos WHERE Name = ?`;
         const [languageResult] = await sequelize.query(languageQuery, {
             replacements: [language],
             type: sequelize.QueryTypes.SELECT,
