@@ -5,6 +5,7 @@ const { Op } = require('sequelize');
 const sequelize = require('../config');
 const Polygon = require('../model/Polygon');
 
+
 router.post('/indian-languages', async (req, res) => {
 
         const languages = req.body;
@@ -109,6 +110,7 @@ router.get('/language-details/:language', async (req, res) => {
         res.status(500).json({ error: 'Server error' });
     }
 });
+
 
 
 module.exports = router;

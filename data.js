@@ -4949,23 +4949,38 @@ const data = [
     }
    ] 
  
-   
-   const LanguageInfo = require("./model/india_language");
-   const insertLanguageData = async () => {
-    try {
-      await LanguageInfo.sync({ force: true });
-      console.log('LanguageInfo table created');
+    const express = require('express');
   
-      const languageDataWithTextSpeakers = data.map(data => ({
-        ...data,
-        No_of_speakers: String(data.No_of_speakers)
-            }));
+    const LanguageInfo = require("./model/india_language");
   
-      await LanguageInfo.bulkCreate(languageDataWithTextSpeakers);
-      console.log('Language data inserted successfully');
-    } catch (err) {
-      console.log(err);
-    }
-  };
-  
-  insertLanguageData();
+const insertLanguageData = async () => {
+  try {
+    await LanguageInfo.sync({ force: true });
+    console.log('LanguageInfo table created');
+
+    const languageDataWithTextSpeakers = data.map(item => ({
+      ...item,
+      No_of_speakers: String(item.No_of_speakers)
+    }));
+
+    await LanguageInfo.bulkCreate(languageDataWithTextSpeakers);
+    console.log('Language data inserted successfully');
+  } catch (err) {
+    console.log(err);
+  }
+};
+
+// Create a router
+const router = express.Router();
+
+// API endpoint to trigger data insertion
+router.post('/insert-language-data', async (req, res) => {
+  try {
+    await insertLanguageData();
+    res.status(201).json({ message: 'Language data inserted successfully' });
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ error: 'Server error' });
+  }
+});
+module.exports = router;
