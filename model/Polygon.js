@@ -14,8 +14,15 @@ const Polygon = sequelize.define('Polygon', {
     },
     country :{
         type:DataTypes.STRING,
-    }
+    },
+    strokeColor :{
+        type:DataTypes.STRING,
 
+    },
+
+    fillColor:{
+        type:DataTypes.STRING,
+    }
 });
 
 Polygon.sync({ alter: true })
