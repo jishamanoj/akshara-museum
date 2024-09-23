@@ -100,7 +100,7 @@ router.post('/language-details', async (req, res) => {
         console.log("................",languageQuery);
 
         // Fetch details from Polygon table
-        const polygonQuery = `SELECT coordinates, state, country FROM Polygons WHERE JSON_CONTAINS(language, '["${language}"]')`;
+        const polygonQuery = `SELECT coordinates, state, country FROM aksharaMuseum.Polygons WHERE JSON_CONTAINS(language, '["${language}"]')`;
         const [polygonResults] = await sequelize.query(polygonQuery);
 //console.log(polygonResults);
         // Combine the results
@@ -291,6 +291,8 @@ router.post('/add-states', async (req, res) => {
   // });
   
   
+ 
+ 
   router.post('/list-language', async (req, res) => {
     const { country } = req.body;
   
